@@ -36,7 +36,7 @@
     if (self) {
         // Custom initialization
         
-        self.screenShotsList = [[[NSMutableArray alloc]initWithCapacity:2]autorelease];
+        self.screenShotsList = [[NSMutableArray alloc] initWithCapacity:2];
         self.canDragBack = YES;
         
     }
@@ -49,9 +49,6 @@
     
     [self.backgroundView removeFromSuperview];
     self.backgroundView = nil;
-    
-    
-    [super dealloc];
 }
 
 - (void)viewDidLoad
@@ -68,12 +65,12 @@
     //self.view.layer.shadowRadius = 5;
     //self.view.layer.shadowOpacity = 1;
     
-    UIImageView *shadowImageView = [[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"leftside_shadow_bg"]]autorelease];
+    UIImageView *shadowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftside_shadow_bg"]];
     shadowImageView.frame = CGRectMake(-10, 0, 10, TOP_VIEW.frame.size.height);
     [TOP_VIEW addSubview:shadowImageView];
     
-    UIPanGestureRecognizer *recognizer = [[[UIPanGestureRecognizer alloc]initWithTarget:self
-                                                                                 action:@selector(paningGestureReceive:)]autorelease];
+    UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self
+                                                                                 action:@selector(paningGestureReceive:)];
     recognizer.delegate = self;
     [recognizer delaysTouchesBegan];
     [self.view addGestureRecognizer:recognizer];
@@ -181,10 +178,10 @@
         {
             CGRect frame = TOP_VIEW.frame;
             
-            self.backgroundView = [[[UIView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width , frame.size.height)]autorelease];
+            self.backgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width , frame.size.height)];
             [TOP_VIEW.superview insertSubview:self.backgroundView belowSubview:TOP_VIEW];
             
-            blackMask = [[[UIView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width , frame.size.height)]autorelease];
+            blackMask = [[UIView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width , frame.size.height)];
             blackMask.backgroundColor = [UIColor blackColor];
             [self.backgroundView addSubview:blackMask];
         }
@@ -194,7 +191,7 @@
         if (lastScreenShotView) [lastScreenShotView removeFromSuperview];
         
         UIImage *lastScreenShot = [self.screenShotsList lastObject];
-        lastScreenShotView = [[[UIImageView alloc]initWithImage:lastScreenShot]autorelease];
+        lastScreenShotView = [[UIImageView alloc] initWithImage:lastScreenShot];
         [self.backgroundView insertSubview:lastScreenShotView belowSubview:blackMask];
         
         //End paning, always check that if it should move right or move left automatically
